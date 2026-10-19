@@ -1,57 +1,26 @@
-# SH&W Matching — Desktop and Phone
+# SH&W Matching — sound update
 
-## Update your existing GitHub Pages site
+## Upload to your existing repository
 
-1. Extract the ZIP.
-2. Open your repository → Code → Add file → Upload files.
-3. Upload the extracted files directly to the root and commit to main. Replace index.html, app.js, styles.css, config.js and cards.csv; add phone.js and phone.css. Keep .nojekyll. README.md is documentation only.
-4. Wait for Pages to redeploy and reload the website. Your Pages settings and website URL remain unchanged.
-5. Hard-refresh or open a private window if the old page remains. An existing saved game resumes in its original mode; finish it and select Play again to reach mode selection.
+Extract the ZIP and upload its contents to the repository root using Add file → Upload files. Commit to main and wait for GitHub Pages to redeploy. Refresh the game; its URL stays the same.
 
-The corrected real database is included: 41 cards, 19 chapters, 38 regular scenarios and 3 distractors. The sample banner is disabled. Assignments and scoring are preserved.
+Replace index.html, app.js and config.js and add audio.js. The full package also includes the existing phone.js, phone.css, styles.css, corrected cards.csv and .nojekyll for convenience. If you have subsequently edited your scenario CSV, keep your newer copy.
 
-## Phone experience
+## Changes
 
-The home page offers Play on Desktop and Play on Phone, with icons. The appropriate option is suggested by screen width, but players can select either. Instructions and a 3–2–1 countdown follow.
+- Settings opens directly. There is no password, unlock form or editable timer.
+- Every new game lasts 10 minutes, starting after the 3–2–1 countdown. Old per-device duration preferences are ignored. A game already saved in a tab retains its original deadline until finished; select Play again for a new 10-minute game.
+- Background music and effects default to on. The new sound-preference key enables music on the first visit to this update, even if the old version defaulted it off. Turning music off in this version is remembered for later visits on the same browser.
+- The original synthesized soundtrack now uses a melody, bass, chords and light percussion. Lobby/review music runs at 104 BPM and gameplay at 116 BPM. No external music downloads are needed.
+- Browsers require user interaction before sound starts. Music begins after the first click, tap or key interaction. Enabled by default does not mean audible before that interaction.
+- Music pauses when the page is hidden. The game timer continues. Settings still offers independent music and sound-effect toggles.
 
-Desktop retains movable Post-it boards. Phone shows one scenario at a time:
+Desktop boards and the phone chapter picker, auto-advance, Undo, Skip, review and result views are unchanged. The real 41-card database and scoring remain intact: regular correct chapter +1; distractor in trash 0; distractor on a chapter board −2. Maximum regular-card score is 38.
 
-- Choose chapter opens a searchable panel. Search by number, chapter name or concept. Select a chapter, inspect its concept, then confirm placement.
-- The next unanswered card appears immediately. Correctness stays hidden until the end.
-- Trash places the card in the trash and advances.
-- Skip leaves the current choice unchanged and moves to another unanswered card.
-- Undo reverses the last placement and returns to that card. If revising an answer, Undo restores its previous destination. One Undo step survives refresh.
-- Review lists cards and their chosen destinations. Filter to unanswered cards or select any card to revisit. Checkmarks mean answered, not correct.
-- After all cards are placed, review them or finish. Finish game requires confirmation. Timeout finishes automatically and closes open pickers.
+There is no longer a need for a shared editable timer service in this fixed-duration edition. Each player has the same 10-minute duration but starts at their own time. No rooms, administrator, names or accounts are added.
 
-Normal phone play fits one screen, tested at 390×844 and 320×568. The card area can scroll for long text, enlarged fonts or short screens. Chapter/review lists scroll within their panels. The timer and action controls stay outside the reading area.
+## Validation
 
-Phone results show one card at a time, the player's choice, points, Previous/Next and Reveal correct answers. Correct placements are green, incorrect red and unanswered gray. Desktop keeps board-style results.
+Local browser tests passed for both play modes, search/concept preview, placement/review/Undo, final results, small-phone layout, fixed duration despite old preferences, removal of password/timer controls, default-on audio, scheduler behavior, mute, saved sound preferences and gameplay music/effects. These are local Chromium checks; test sound on your actual phone/browser after publishing.
 
-## Content and scoring
-
-The real distractors describe unsafe practices. Instructions now tell players to discard incorrect or unsafe practices even when they mention a safety topic.
-
-Correct chapter +1; wrong chapter, regular card in trash or unplaced 0; distractor in trash 0; distractor on a chapter board −2. Maximum score is 38; scores can be negative. Both modes share the same scoring function.
-
-Keep the five CSV headers exactly:
-
-`Chapter Ref,Chapter Name,Concept,Card #,Post-it Card Scenario`
-
-Use unique Card # values and preserve references as text, including 7.1 and 7.2. Repeat the same chapter name and concept for each chapter reference. Continue editing the sheet and replacing its CSV export as needed. Resumed games retain their original data snapshot until finished.
-
-## Shared timer connection still pending
-
-This package upgrades the phone/desktop experience. It does NOT implement the shared settings backend. The existing 10-minute default and safetybox gate remain; changing duration in the dialog still affects only this browser/device and future games. Do not treat it as an all-player setting.
-
-The separately requested all-player duration control still needs the shared Apps Script/Sheets connection discussed earlier. It has not been configured or deployed. Changing defaultMinutes in config.js only changes the default for browsers without a saved preference. Each player has an individual start/deadline.
-
-The static-site password is a convenience gate, not secure authentication. No player names, rooms or account system are introduced. Session storage supports same-tab recovery; the timer continues through refresh, settings and backgrounding.
-
-## Sound, hosting and verification
-
-Music/effects remain under Settings beside AIRBUS. Audio is generated locally. No external font, picture or music host is needed. For local preview, use a web server such as python -m http.server 8000 and open http://localhost:8000; double-clicking index.html can block CSV loading.
-
-Local Chromium checks passed for mode selection, all 41 cards, phone viewport fit, search and concepts, automatic advance, Undo including revised placements, trash, Skip, review filters, resume/deadline, timeout with picker open, results/reveal, all-placed screen and desktop boards. Phone screenshots were visually inspected. No browser JavaScript errors were recorded.
-
-This package has not been uploaded to your repository. Test the deployed site on your actual phones and work network before the session.
+For a local preview, serve this directory with a web server (for example python -m http.server 8000). Opening index.html directly can prevent CSV loading.
