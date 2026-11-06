@@ -1,26 +1,14 @@
-# SH&W Matching — sound update
+# SH&W Chapter Matching Game
 
-## Upload to your existing repository
+## Updated game
+There are 19 cards, one for each chapter. The first scenario in each chapter's original CSV order is retained, with its original card ID and wording. Decimal chapter references remain separate. There are no distractor cards or trash controls. Each correct match earns 1 point; incorrect or unplaced cards earn 0.
 
-Extract the ZIP and upload its contents to the repository root using Add file → Upload files. Commit to main and wait for GitHub Pages to redeploy. Refresh the game; its URL stays the same.
+The timer remains fixed at 7 minutes. Choose Desktop or Phone, read the instructions, then select I'm ready for the countdown. Desktop supports drag-and-drop and click placement. Phone supports chapter selection, search, undo and review. Results show placements and reveal correct answers.
 
-Replace index.html, app.js and config.js and add audio.js. The full package also includes the existing phone.js, phone.css, styles.css, corrected cards.csv and .nojekyll for convenience. If you have subsequently edited your scenario CSV, keep your newer copy.
+Background music has been removed. Sound effects remain optional in Settings. The new session key prevents older, longer card sets from being restored.
 
-## Changes
+## Deploy
+Extract this ZIP. Upload all its contents directly to the root of the existing SH&W GitHub repository, replacing the previous files. Commit the update. Keep Pages configured to deploy from main and /(root). Wait for deployment, then reload the website; hard refresh if necessary. Do not upload just the ZIP.
 
-- Settings opens directly. There is no password, unlock form or editable timer.
-- Every new game lasts 10 minutes, starting after the 3–2–1 countdown. Old per-device duration preferences are ignored. A game already saved in a tab retains its original deadline until finished; select Play again for a new 10-minute game.
-- Background music and effects default to on. The new sound-preference key enables music on the first visit to this update, even if the old version defaulted it off. Turning music off in this version is remembered for later visits on the same browser.
-- The original synthesized soundtrack now uses a melody, bass, chords and light percussion. Lobby/review music runs at 104 BPM and gameplay at 116 BPM. No external music downloads are needed.
-- Browsers require user interaction before sound starts. Music begins after the first click, tap or key interaction. Enabled by default does not mean audible before that interaction.
-- Music pauses when the page is hidden. The game timer continues. Settings still offers independent music and sound-effect toggles.
-
-Desktop boards and the phone chapter picker, auto-advance, Undo, Skip, review and result views are unchanged. The real 41-card database and scoring remain intact: regular correct chapter +1; distractor in trash 0; distractor on a chapter board −2. Maximum regular-card score is 38.
-
-There is no longer a need for a shared editable timer service in this fixed-duration edition. Each player has the same 10-minute duration but starts at their own time. No rooms, administrator, names or accounts are added.
-
-## Validation
-
-Local browser tests passed for both play modes, search/concept preview, placement/review/Undo, final results, small-phone layout, fixed duration despite old preferences, removal of password/timer controls, default-on audio, scheduler behavior, mute, saved sound preferences and gameplay music/effects. These are local Chromium checks; test sound on your actual phone/browser after publishing.
-
-For a local preview, serve this directory with a web server (for example python -m http.server 8000). Opening index.html directly can prevent CSV loading.
+## Database
+Edit cards.csv while preserving the five headers. Chapter references are strings, so 7.1 and 7.2 remain distinct. The app uses the first scenario for each chapter and ignores distractor rows or additional rows for that chapter. To change a selected scenario, edit its retained CSV row.
